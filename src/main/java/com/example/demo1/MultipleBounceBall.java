@@ -51,9 +51,9 @@ public class MultipleBounceBall extends Application {
         Button btResume = new Button("Resume");
         Button btRestart = new Button("Restart");
 
-//        Button btPrintBallList = new Button("Print Ball List");
+        Button btPrintBallList = new Button("Print Ball List");
         HBox hBox = new HBox(10);
-        hBox.getChildren().addAll( btSuspend, btResume, btAdd, btSubtract, btRestart);
+        hBox.getChildren().addAll( btSuspend, btResume, btAdd, btSubtract, btPrintBallList, btRestart);
         hBox.setAlignment(Pos.CENTER);
 
         // Add or remove a ball // and suspend/resume animation
@@ -61,7 +61,7 @@ public class MultipleBounceBall extends Application {
         btSubtract.setOnAction(e -> ballPane.subtract());
         btSuspend.setOnAction(e -> ballPane.pause());
         btResume.setOnAction(e -> ballPane.play());
-//        btPrintBallList.setOnAction(e -> ballPane.printBallList());
+        btPrintBallList.setOnAction(e -> ballPane.printBallList());
         btRestart.setOnAction(e -> ballPane.restart());
 
         // Pause and resume animation
@@ -197,6 +197,7 @@ public class MultipleBounceBall extends Application {
                         //Remove the new ball if collision is true, and add its radius to the other ball
                         if (ball1.getCreationTime().isAfter(ball2.getCreationTime())) {
                             ballsToRemove.add(ball1);
+                            getChildren().remove(ball1);
                             ball2.setRadius(ball2.getRadius() + ball1.getRadius());
                         } else {
                             ballsToRemove.add(ball2);
